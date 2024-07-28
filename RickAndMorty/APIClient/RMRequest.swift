@@ -23,7 +23,7 @@ final class RMRequest {
     private let endPoint: RMEndPoint
     
     /// Path components for API, if any
-    private let pathComponents: Set<String>   // we used Set<> instead of Array bcz Set<> doesn't allows duplicate values and we don't want duplicate pathComponents in our url. This is good practice for better optimization.
+    private let pathComponents: [String]
     
     /// Query arguments for API, if any
     private let queryParameters: [URLQueryItem]
@@ -70,11 +70,17 @@ final class RMRequest {
     ///   - endPoint: Target endPoints
     ///   - pathComponents: Collection fo Path components
     ///   - queryParameters: Collection of Query parameters
-    init(endPoint: RMEndPoint, pathComponents: Set<String> = [], queryParameters: [URLQueryItem] = []) {
+    init(endPoint: RMEndPoint, pathComponents: [String] = [], queryParameters: [URLQueryItem] = []) {
         self.endPoint = endPoint
         self.pathComponents = pathComponents
         self.queryParameters = queryParameters
     }
     
     
+}
+
+extension RMRequest {
+    static let listCharactersRequests = RMRequest(endPoint: .character)
+    static let listLocationsRequests = RMRequest(endPoint: .location)
+    static let listEpisodesRequests = RMRequest(endPoint: .episode)
 }
