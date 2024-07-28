@@ -9,5 +9,72 @@ import Foundation
 
 /// Object that represents a single API call
 final class RMRequest {
+    // Base URL
+    // Endpoint
+    // Path components
+    // Query parameters
+    
+    /// API Constants
+    private struct Constants {
+        static let baseURL = "https://rickandmortyapi.com/api"
+    }
+    
+    /// Desired endpoint
+    private let endPoint: RMEndPoint
+    
+    /// Path components for API, if any
+    private let pathComponents: Set<String>   // we used Set<> instead of Array bcz Set<> doesn't allows duplicate values and we don't want duplicate pathComponents in our url. This is good practice for better optimization.
+    
+    /// Query arguments for API, if any
+    private let queryParameters: [URLQueryItem]
+    
+    /// constructed url for the API request in string format
+    private var urlString: String {
+        
+        var string = Constants.baseURL
+        string += "/"
+        string += "\(endPoint.rawValue)/"   // character or location or episode
+        
+        if !pathComponents.isEmpty {
+            pathComponents.forEach({
+                string += "/\($0)/"
+            })
+        }
+        
+        // query parameters means something like '?status=alive'. below we try to make and combine all the query paramenter to send as API Call url.
+        if !queryParameters.isEmpty {
+            string += "?"
+            let argumetString = queryParameters.compactMap({
+                guard let value = $0.value else {return nil}
+                return "\($0.name)=\(value)"
+            }).joined(separator: "&")
+            
+            string += argumetString
+        }
+        
+        return string
+    }
+    
+    /// Computed & Constructed API url
+    public var url: URL? {
+        return URL(string: urlString)
+    }
+    
+    /// Desired HTTP method,. In this app, all the requests are GET
+    public let httpMethod = "GET"
+    
+    // MARK: - Public
+    
+    /// Construct request
+    /// - Parameters:
+    ///   - endPoint: Target endPoints
+    ///   - pathComponents: Collection fo Path components
+    ///   - queryParameters: Collection of Query parameters
+    init(endPoint: RMEndPoint, pathComponents: Set<String> = [], queryParameters: [URLQueryItem] = []) {
+        self.endPoint = endPoint
+        self.pathComponents = pathComponents
+        self.queryParameters = queryParameters
+    }
+    
     
 }
