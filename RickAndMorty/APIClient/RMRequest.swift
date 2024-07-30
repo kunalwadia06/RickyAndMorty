@@ -37,7 +37,7 @@ final class RMRequest {
         
         if !pathComponents.isEmpty {
             pathComponents.forEach({
-                string += "/\($0)/"
+                string += "\($0)/"
             })
         }
         
