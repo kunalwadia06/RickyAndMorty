@@ -30,6 +30,8 @@
 		3008DDEF2C58D72A00C94846 /* RMCharacterListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3008DDEE2C58D72A00C94846 /* RMCharacterListViewViewModel.swift */; };
 		3008DDF12C58D83200C94846 /* RMCharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3008DDF02C58D83200C94846 /* RMCharacterListView.swift */; };
 		3008DDF42C58E72D00C94846 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3008DDF32C58E72D00C94846 /* Extensions.swift */; };
+		3008DDF62C59109200C94846 /* RMCharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3008DDF52C59109200C94846 /* RMCharacterCollectionViewCell.swift */; };
+		3008DDF82C59162500C94846 /* RMCharacterCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3008DDF72C59162500C94846 /* RMCharacterCollectionViewCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		3008DDEE2C58D72A00C94846 /* RMCharacterListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterListViewViewModel.swift; sourceTree = "<group>"; };
 		3008DDF02C58D83200C94846 /* RMCharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterListView.swift; sourceTree = "<group>"; };
 		3008DDF32C58E72D00C94846 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		3008DDF52C59109200C94846 /* RMCharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterCollectionViewCell.swift; sourceTree = "<group>"; };
+		3008DDF72C59162500C94846 /* RMCharacterCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMCharacterCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				3008DDF02C58D83200C94846 /* RMCharacterListView.swift */,
+				3008DDF52C59109200C94846 /* RMCharacterCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				3008DDEE2C58D72A00C94846 /* RMCharacterListViewViewModel.swift */,
+				3008DDF72C59162500C94846 /* RMCharacterCollectionViewCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -277,6 +283,7 @@
 				3008DD952C53CB5100C94846 /* RMTabBarController.swift in Sources */,
 				3008DDB52C550F7500C94846 /* RMLocationViewController.swift in Sources */,
 				3008DDB92C550F9700C94846 /* RMEpisodeViewController.swift in Sources */,
+				3008DDF62C59109200C94846 /* RMCharacterCollectionViewCell.swift in Sources */,
 				3008DDEF2C58D72A00C94846 /* RMCharacterListViewViewModel.swift in Sources */,
 				3008DD912C53CB5100C94846 /* AppDelegate.swift in Sources */,
 				3008DD932C53CB5100C94846 /* SceneDelegate.swift in Sources */,
@@ -286,6 +293,7 @@
 				3008DDBD2C5523FA00C94846 /* RMService.swift in Sources */,
 				3008DDF12C58D83200C94846 /* RMCharacterListView.swift in Sources */,
 				3008DDB72C550F8400C94846 /* RMCharacterViewController.swift in Sources */,
+				3008DDF82C59162500C94846 /* RMCharacterCollectionViewCellViewModel.swift in Sources */,
 				3008DDAE2C550E0800C94846 /* RMLocation.swift in Sources */,
 				3008DDBF2C55240800C94846 /* RMRequest.swift in Sources */,
 				3008DDB02C550E1600C94846 /* RMCharacter.swift in Sources */,
