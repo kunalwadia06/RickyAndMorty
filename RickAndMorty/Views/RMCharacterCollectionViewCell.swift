@@ -91,7 +91,6 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         contentView.layer.shadowOffset = CGSize(width: -4, height: 4)
         contentView.layer.shadowOpacity = 0.3
         
-//        containerView.backgroundColor = .red
         containerView.layer.cornerRadius = 10.0
         containerView.clipsToBounds = true
     }

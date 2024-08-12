@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RMCharacterCollectionViewCellViewModel {      // I changed it from 'final class' to 'struct'
+final class RMCharacterCollectionViewCellViewModel {      // I changed it from 'final class' to 'struct'
     
     public let characterName: String
     private let characterStatus: RMCharacterStatus

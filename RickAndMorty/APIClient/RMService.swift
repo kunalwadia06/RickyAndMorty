@@ -55,7 +55,21 @@ final class RMService {
             task.resume()
     }
     
+    public func requestt<T: Decodable>(urlString: String) async throws -> T {
+        
+        guard let url = URL(string: urlString) else {
+            throw RMRequestError.failedToCreateRequest
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let dataResponse = try JSONDecoder().decode(T.self, from: data)
+        print("========",dataResponse)
+        return dataResponse
+    }
+    
     private func request(from rmRequest: RMRequest) -> URLRequest? {
+        
         guard let url = rmRequest.url else {return nil}
         
         var request = URLRequest(url: url)
