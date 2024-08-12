@@ -29,6 +29,8 @@ final class RMCharacterListViewViewModel: NSObject {
     
     private var cellViewModels: [RMCharacterCollectionViewCellViewModel] = []
     
+    private var isLoadingMoreCharacters = false
+    
     /// fetch initial set of characters (20)
     public func fetchCharacters() {
         RMService.shared.execute(apiRequest: .listCharactersRequests, expecting: RMGetAllCharactersResponse.self) { [weak self] result in
@@ -48,7 +50,7 @@ final class RMCharacterListViewViewModel: NSObject {
     
     /// Paginate if additional characters are needed
     public func fetchAdditionalCharacter() {
-        
+        isLoadingMoreCharacters = true
     }
     
     public var shouldShowLoadMoreIndicator: Bool {
@@ -81,7 +83,7 @@ extension RMCharacterListViewViewModel: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return UIEdgeInsets(top: 10, left: 10, bottom: 15, right: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -97,17 +99,17 @@ extension RMCharacterListViewViewModel: UICollectionViewDelegate, UICollectionVi
     /// Footer methods
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        guard kind == UICollectionView.elementKindSectionFooter, shouldShowLoadMoreIndicator else {
-            return UICollectionReusableView()
+        guard kind == UICollectionView.elementKindSectionFooter, let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RMFooterLoadingCollectionReusableView.identifier, for: indexPath) as? RMFooterLoadingCollectionReusableView else {
+            fatalError("Unsupported footer")
         }
         
-        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RMFooterLoadingCollectionReusableView.identifier, for: indexPath)
+        footer.startAnimating()
         
         return footer
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 100)
+        return shouldShowLoadMoreIndicator ? CGSize(width: collectionView.frame.width, height: 50) : .zero
     }
     
     
@@ -115,10 +117,18 @@ extension RMCharacterListViewViewModel: UICollectionViewDelegate, UICollectionVi
 
 // MARK: - ScrollViewDelegate Methods
 extension RMCharacterListViewViewModel: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        guard shouldShowLoadMoreIndicator else {return}
+        guard shouldShowLoadMoreIndicator, !isLoadingMoreCharacters else {return}
         
+        let offset = scrollView.contentOffset.y
+        let totalContentHeight = scrollView.contentSize.height
+        let scrollViewHeight = scrollView.frame.height
+        
+        if offset >= (totalContentHeight - scrollViewHeight - 70) && offset > 0 {
+            fetchAdditionalCharacter()
+        }
         
     }
 }
